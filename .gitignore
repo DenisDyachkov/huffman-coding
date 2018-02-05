@@ -27,6 +27,9 @@
 *.out
 *.app
 
+# Build directroy
+cmake-build-debug/
+
 # =========================
 # Operating System Files
 # =========================
