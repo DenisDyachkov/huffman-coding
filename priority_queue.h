@@ -1,5 +1,5 @@
-#ifndef HAFFMAN_PRIORITY_QUEUE_H
-#define HAFFMAN_PRIORITY_QUEUE_H
+#ifndef HUFFMAN_PRIORITY_QUEUE_H
+#define HUFFMAN_PRIORITY_QUEUE_H
 
 struct priority_queue_base {
     struct priority_queue_base *next;
@@ -16,4 +16,4 @@ void priority_queue_init(struct priority_queue *queue);
 void priority_queue_push(struct priority_queue *queue, struct priority_queue_base *new);
 struct priority_queue_base* priority_queue_pop(struct priority_queue *queue);
 
-#endif //HAFFMAN_PRIORITY_QUEUE_H
+#endif //HUFFMAN_PRIORITY_QUEUE_H
