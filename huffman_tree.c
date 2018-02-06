@@ -1,10 +1,7 @@
 #include "huffman_tree.h"
 #include <stdlib.h>
 
-#define NODE_TYPE_LIST 1
-#define NODE_TYPE_NODE 0
-
-void tree_list_create(struct priority_queue *queue, int weight, unsigned char sym) {
+static void tree_list_create(struct priority_queue *queue, int weight, unsigned char sym) {
     if (queue) {
         struct tree_queue_node *node = (struct tree_queue_node*)malloc(sizeof(struct tree_queue_node));
         struct tree_node_list *list = (struct tree_node_list*)malloc(sizeof(struct tree_node_list));
@@ -46,6 +43,22 @@ void queue_to_tree(struct priority_queue *queue) {
         left->tree = (struct tree_node_base*)node;
 
         priority_queue_push(queue, (struct priority_queue_base*)left);
+    }
+}
+
+static void tree_free(struct tree_node_base *tree) {
+    if (tree->type)
+        return free(tree);
+    tree_free(((struct tree_node*)tree)->left);
+    tree_free(((struct tree_node*)tree)->right);
+    free(tree);
+}
+
+void queue_tree_free(struct priority_queue *queue) {
+    struct tree_queue_node *node;
+    while ((node = (struct tree_queue_node*)priority_queue_pop(queue)) != NULL) {
+        tree_free(node->tree);
+        free(node);
     }
 }
 

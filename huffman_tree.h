@@ -2,6 +2,9 @@
 #define HUFFMAN_HUFFMAN_TREE_H
 
 #include "priority_queue.h"
+#define NODE_TYPE_LIST 1
+#define NODE_TYPE_NODE 0
+
 struct tree_node_base {
     int type;
 };
@@ -24,6 +27,7 @@ struct tree_queue_node {
 
 void bin_to_queue(struct priority_queue *queue, const char *buffer, int size);
 void queue_to_tree(struct priority_queue *queue);
+void queue_tree_free(struct priority_queue *queue);
 
 #ifdef _DEBUG_PRINT_
 void print_tree(struct tree_node_base *tree, char *out_print, int bits);

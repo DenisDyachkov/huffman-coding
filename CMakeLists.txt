@@ -3,5 +3,5 @@ project(huffman)
 
 set(CMAKE_C_STANDARD 99)
 
-set(SOURCE_FILES main.c priority_queue.c priority_queue.h huffman_tree.c huffman_tree.h)
+set(SOURCE_FILES main.c priority_queue.c priority_queue.h huffman_tree.c huffman_tree.h bit_table.c bit_table.h)
 add_executable(huffman ${SOURCE_FILES})
