@@ -2,7 +2,7 @@
 
 void priority_queue_push(struct priority_queue *queue, struct priority_queue_base *new) {
     ++queue->size;
-    if (!queue->data || queue->data->weight > new->weight) {
+    if (!queue->data || queue->data->weight >= new->weight) {
         new->next = queue->data;
         queue->data = new;
         return;

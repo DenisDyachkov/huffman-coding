@@ -22,7 +22,11 @@ struct tree_queue_node {
     struct tree_node_base *tree;
 };
 
-void tree_list_create(struct priority_queue *queue, int weight, unsigned char sym);
+void bin_to_queue(struct priority_queue *queue, const char *buffer, int size);
 void queue_to_tree(struct priority_queue *queue);
 
-#endif //HUMAN_HUFFMAN_TREE_HAF
+#ifdef _DEBUG_PRINT_
+void print_tree(struct tree_node_base *tree, char *out_print, int bits);
+#endif //_DEBUG_PRINT_
+
+#endif //HUFFMAN_HUFFMAN_TREE_HAF
