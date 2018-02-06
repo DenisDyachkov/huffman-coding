@@ -23,11 +23,13 @@ int write_bits(unsigned char **out, unsigned *used, unsigned *size, struct bit_t
     unsigned offset = *used & 7;
     unsigned bit;
 
-    for (bit = 0; bit < node->bits_count; ++bit) {
-        *write |= (node->bits[bit >> 3] & (0x1 << bit)) << offset;
+    for (bit = 0, *write &= ~(0xFF << offset); bit < node->bits_count; ++bit) {
+        *write |= ((node->bits[bit >> 3] >> bit) & 0x1) << offset;
         offset = (offset + 1) & 7;
-        if (!offset)
-            ++write;//0: +
+        if (!offset) {
+            ++write;
+            *write = 0;
+        }
     }
     *used += node->bits_count;
     return 0;
@@ -68,4 +70,8 @@ struct bit_table* tree_to_bit_table(struct priority_queue *queue) {
     free(bits);
 
     return table;
+}
+
+int bit_node_empty(struct bit_table *node) {
+    return !node->bits_count;
 }
