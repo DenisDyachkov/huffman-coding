@@ -10,5 +10,6 @@ struct bit_table {
 
 struct bit_table* tree_to_bit_table(struct priority_queue *queue);//return bit_table[256]
 int write_bits(unsigned char **out_buffer, unsigned *bits_used, unsigned *buffer_size_bytes, struct bit_table *node);
+int bit_node_empty(struct bit_table *node);
 
 #endif //HUFFMAN_BIT_TABLE_H

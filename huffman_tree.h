@@ -25,7 +25,7 @@ struct tree_queue_node {
     struct tree_node_base *tree;
 };
 
-void bin_to_queue(struct priority_queue *queue, const char *buffer, int size);
+void bin_to_queue(struct priority_queue *queue, const unsigned char *buffer, int size);
 void queue_to_tree(struct priority_queue *queue);
 void queue_tree_free(struct priority_queue *queue);
 

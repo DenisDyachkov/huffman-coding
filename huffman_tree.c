@@ -16,7 +16,7 @@ static void tree_list_create(struct priority_queue *queue, int weight, unsigned 
     }
 }
 
-void bin_to_queue(struct priority_queue *queue, const char *buffer, int size) {
+void bin_to_queue(struct priority_queue *queue, const unsigned char *buffer, int size) {
     unsigned char counts[256] = {0};
     int iter;
     for (iter = 0; iter < size; ++iter)
