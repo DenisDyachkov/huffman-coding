@@ -1,6 +1,8 @@
 #include "huffman_coding.h"
 #include <stdlib.h>
 
+struct tree_node *temp_variable;
+
 struct encode_buffer* encode_buffer_init() {
     struct encode_buffer *encode_buffer = (struct encode_buffer*)malloc(sizeof(struct encode_buffer));
     if (encode_buffer) {
@@ -39,6 +41,7 @@ struct encode_buffer* encode_buffer(const unsigned char *buffer, unsigned size) 
     struct bit_table *table = tree_to_bit_table(&queue);
     struct encode_buffer *result = encode(table, buffer, size);
     //save tree for decode
+    temp_variable = (struct tree_node*)((struct tree_queue_node*)queue.data)->tree;
     return result;
 }
 

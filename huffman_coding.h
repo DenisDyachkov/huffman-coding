@@ -9,6 +9,8 @@ struct encode_buffer {
     unsigned capacity;
 };
 
+void encode_buffer_free(struct encode_buffer *data);
+
 struct encode_buffer* encode_buffer(const unsigned char *buffer, unsigned size);
 unsigned char* decode_buffer(const struct tree_node *root, const unsigned char *buffer, unsigned bit_count);
 
