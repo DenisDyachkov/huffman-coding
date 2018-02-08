@@ -11,25 +11,26 @@ int write_bits(unsigned char **out, unsigned *used, unsigned *size, struct bit_t
 
     unsigned need_bits = *used + node->bits_count;
     if (bits_to_bytes(need_bits) > *size) {
-        unsigned capacity = *size * 2 < bits_to_bytes(need_bits) ? bits_to_bytes(need_bits) : *size * 2;
+        unsigned capacity = (*size * 2 < bits_to_bytes(need_bits)) ? bits_to_bytes(need_bits) : *size * 2;
         unsigned char *new_buffer = (unsigned char*)realloc(*out, capacity);
         if (!new_buffer)
             return -1;
-        *out = new_buffer;
         *size = capacity;
+        *out = new_buffer;
     }
 
     unsigned char *write = *out + (*used >> 3);
     unsigned offset = *used & 7;
     unsigned bit;
 
-    for (bit = 0, *write &= ~(0xFF << offset); bit < node->bits_count; ++bit) {
-        *write |= ((node->bits[bit >> 3] >> bit) & 0x1) << offset;
+    for (bit = 0; bit < node->bits_count; ++bit) {
+        if ((node->bits[bit >> 3] >> bit) & 0x1)
+            *write |= 1 << offset;
+        else
+            *write &= ~(1 << offset);
         offset = (offset + 1) & 7;
-        if (!offset) {
+        if (!offset)
             ++write;
-            *write = 0;
-        }
     }
     *used += node->bits_count;
     return 0;

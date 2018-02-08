@@ -59,7 +59,7 @@ unsigned char* decode_buffer(const struct tree_node *root, const unsigned char *
         if (node->base.type == NODE_TYPE_LIST) {
             if (head - decode >= capacity) {
                 capacity *= 2;
-                unsigned char *new = (unsigned char*)realloc(decode, capacity);
+                unsigned char *new = (unsigned char*)realloc(decode, capacity + 1);
                 if (!new) {
                     free(decode);
                     return NULL;
